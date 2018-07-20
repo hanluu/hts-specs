@@ -1,6 +1,6 @@
 all: pdf
-
-PDFS =	BCFv1_qref.pdf \
+ 
+PDFS = BCFv1_qref.pdf \
 	BCFv2_qref.pdf \
 	CRAMv2.1.pdf \
 	CRAMv3.pdf \
@@ -11,6 +11,8 @@ PDFS =	BCFv1_qref.pdf \
 	VCFv4.1.pdf \
 	VCFv4.2.pdf \
 	VCFv4.3.pdf
+
+diffs: $(PDFS:%=diffs/%)
 
 pdf: $(PDFS:%=new/%)
 
@@ -27,7 +29,7 @@ new/VCFv4.3.pdf  diff/VCFv4.3.pdf:  VCFv4.3.tex  new/VCFv4.3.ver
 
 PDFLATEX = pdflatex
 
-new/%.pdf: %.tex
+new/%.pdf: %.tex new/%.ver
 	scripts/rerun.sh new/$* $(PDFLATEX) --output-directory new $<
 
 new/CRAMv2.1.ver new/CRAMv3.ver: img/CRAMFileFormat2-1-fig001.png img/CRAMFileFormat2-1-fig002.png img/CRAMFileFormat2-1-fig003.png img/CRAMFileFormat2-1-fig004.png img/CRAMFileFormat2-1-fig005.png img/CRAMFileFormat2-1-fig006.png img/CRAMFileFormat2-1-fig007.png
