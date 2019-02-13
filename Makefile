@@ -41,7 +41,7 @@ new/%.ver: %.tex
 
 diff: $(PDFS:%=diff/%)
 
-OLD = master
+OLD = HEAD
 NEW =
 
 diff/%.pdf: %.tex

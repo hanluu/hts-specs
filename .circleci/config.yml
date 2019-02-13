@@ -29,7 +29,7 @@ jobs:
               touch $(git diff-tree --name-only $mergebase HEAD) || true
 
               # Rebuild the actually changed PDFs, and remove the merely touched ones
-              make diff
+              make OLD=$mergebase NEW=HEAD diff 
               find diff -empty -delete -mindepth 1
 
       - run:
