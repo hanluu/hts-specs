@@ -8,7 +8,7 @@ RUN apt-get update -q && \
 
 RUN git clone https://github.com/ftilmann/latexdiff.git && \
     cd latexdiff && \
-    git checkout 3e56ad7cb8e7451322ce7478e7ebbd1e7be863e1 && \
+    git checkout 1.3.0 && \
     make distribution && \
     cd dist && \
     make install 

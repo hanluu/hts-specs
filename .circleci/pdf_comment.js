@@ -8,7 +8,7 @@ const ls = spawnSync.spawnSync( 'git', ["describe" ,"--always"]);
 
 function addLink(file){
   text="";
-  const diffFile = "diffs/"+file+".pdf";
+  const diffFile = "diff/"+file+".pdf";
   const fullFile = "pdfs/"+file+".pdf";
   console.log(file)
   console.log(diffFile)
@@ -21,10 +21,11 @@ function addLink(file){
 
 console.log( `git-commit: ${ls.stdout.toString()}` );
 
-const diffPDFs = fs.readdirSync("diffs")
+const diffPDFs = fs.readdirSync("diff")
   .filter(s=>s.match(".pdf$"));
 
 if (diffPDFs.length==0) {
+  console.log("No diffs.")
   return;
 }
 
@@ -33,11 +34,10 @@ diffPDFs.map(s=>s.replace(".pdf",""))
 
 var text=`Changed PDFs as of ${ls.stdout.toString().trim()}:` 
 
-text += fs.readdirSync("diffs")
+text += fs.readdirSync("diff")
 	.filter(s=>s.match(".pdf$"))
 	.map(s=>s.replace(".pdf",""))
 	.map(file => addLink(file)).join(",")+".";
-
 
 console.log(text)
 bot.comment(process.env.GH_AUTH_TOKEN, text)

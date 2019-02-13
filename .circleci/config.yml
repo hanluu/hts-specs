@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: htsspecs/circle-ci-image:0.5
+      - image: htsspecs/circle-ci-image:0.6
     steps:
       - checkout
       - run: 
@@ -20,8 +20,8 @@ jobs:
               mergebase=$(git merge-base HEAD origin/master)
               echo $mergebase
 
-              mkdir -p diffs
-              make --touch diffs
+              mkdir -p diff
+              make --touch diff
 
               # Avoid timing issues
               sleep 2  
@@ -29,19 +29,16 @@ jobs:
               touch $(git diff-tree --name-only $mergebase HEAD) || true
 
               # Rebuild the actually changed PDFs, and remove the merely touched ones
-              make diffs
-              find diffs -empty -delete -mindepth 1
+              make diff
+              find diff -empty -delete -mindepth 1
 
       - run:
           name: Post PDFs to Github PR
           command: |
-              scripts/pdf_comment.js
+              .circleci/pdf_comment.js
       - store_artifacts:
           path: pdfs
       - store_artifacts: 
           path: logs
       - store_artifacts:
-          path: diffs
-
-      
-
+          path: diff

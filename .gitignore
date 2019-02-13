@@ -14,4 +14,4 @@ GNUmakefile
 /diff/*.tex
 /new/*.pdf
 /_site
-/diffs
+/diff

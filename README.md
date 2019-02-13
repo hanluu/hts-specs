@@ -1,4 +1,3 @@
-
 SAM/BAM and related specifications
 ==================================
 
@@ -72,11 +71,5 @@ Transfer protocols
 
 [FASTA]:      https://en.wikipedia.org/wiki/FASTA_format
 [FASTQ]:      https://academic.oup.com/nar/article/38/6/1767/3112533
-
-Circle-ci Integration
-----
-
-circle-ci will automatically run the make-file for PRs and merge events. 
-
 
 <!-- vim:set linebreak: -->
