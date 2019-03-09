@@ -47,6 +47,9 @@ NEW =
 diff/%.pdf: %.tex
 	TEXINPUTS=:..:../new latexdiff-vc --pdf --dir diff --force --git --subtype ONLYCHANGEDPAGE --graphics-markup=none --ignore-warnings --revision $(OLD) $(if $(NEW),--revision $(NEW)) $<
 
+show-styles:
+	@sed -n '/\\usepackage/s/.*{\(.*\)}$$/\1/p' *.tex | sort | uniq -c
+
 
 mostlyclean:
 	-rm -f new/*.aux new/*.log new/*.out new/*.toc new/*.ver
@@ -58,4 +61,4 @@ clean: mostlyclean
 	-rm -rf _site
 
 
-.PHONY: all pdf diff mostlyclean clean
+.PHONY: all pdf diff show-styles mostlyclean clean
